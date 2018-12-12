@@ -1,0 +1,360 @@
+from __future__ import print_function
+import random
+
+playerItems = []
+Health = 3
+funMeter = 0
+funValue = 0
+funCounter = 0
+getShirt = False
+getTongs = False
+
+startRoom = True
+westRoom = False
+northRoom = False
+eastRoom = False
+southRoom = False
+def startGame():
+    global stupidValue
+    print('Welcome to Unreal Ted. The game where you do stuff. You will definetly die.')
+    print('There are four doors in this room.  They are in each cardinal direction.')
+    userAction = raw_input('Do you know your cardinal directions? (Yes or No)').lower()
+    if userAction == 'yes':
+        print('Alright. Would you like the tutorial? Too bad. Figure it out.')
+    elif userAction == 'no':
+        print('Wow, you are actually stupid.')
+        stupidValue += 1
+    elif userAction == 'or':
+        print('Haha. So funny. You are a riot.')
+        stupidValue += 1
+    else:
+        print('How hard is it to type yes or no?')
+    userAction = raw_input('What is your name?')
+    print('Nice to meet you Ted. Welcome to Unreal.')
+    raw_input('Press enter to start the game. ')
+    startRoom()
+
+def startRoom():
+    global startRoom
+    global enteredRooms
+    global openedDoors
+    global funValue
+    global funCounter
+    global funMeter
+    global Health
+    global playerItems
+    stupidValue = 0
+    exitRoom = False
+    direction = raw_input('Where do we go(N/S/W/E)?').upper()
+    while exitRoom == False:
+        if direction == 'N':
+            exitRoom = True
+            startRoom = False
+            roomNorth()
+        elif direction == 'E':
+            exitRoom = True
+            startRoom = False
+            roomEast()
+        elif direction == 'S':
+            exitRoom = True
+            startRoom = False
+            roomSouth()
+        elif direction == 'W':
+            exitRoom = True
+            startRoom = False
+            roomWest()
+        else:
+            print('Ok. How hard is it to play the game?')
+            stupidValue += 1
+                   
+def roomNorth():
+    global enteredRooms
+    global funCounter
+    global funValue
+    global funMeter
+    global Health
+    global playerItems
+    monster = 0
+    monType = ''
+    print('Well hello there. Welcome to my room of the North.')
+    if 'roomNorth' in enteredRooms:
+        print('Back already? See anyone I know?')
+    if 'roomNorth' not in enteredRooms:
+        enteredRooms += ['roomNorth']
+    funValue += 1
+    funMeter += 1
+    if enteredRooms >= 1:
+        funCounter = monster
+        if monster == 0:
+            monType = 'Giant Rat'
+            message = 'Youre going to be eRATicated!'
+        elif monster == 1:
+            monType ='Anime Gurl'
+            message = 'それはとてもかわいい！'
+        elif monster == 2:
+            monType = 'Small Golem'
+            message = 'YIFALCHUNBEE!'
+        elif monster == 3:
+            monType = 'Skeletal Warrior'
+            message = 'OH NO, I have a fear of calcium based life forms!'
+        elif monster == 4:
+            monType = 'Sickly Bear'
+            message = 'Honesly I dont have a joke for this, just please put it out of its misery.'
+    print('You encounter a ', monType, message,' What will you do???')
+    userAction = input('Will you fight?(Y/N)').upper()
+    if userAction == 'Y':
+        if monster == 5:
+            print ('Crap you actually killed it, I was joking.')
+            print ('You get cancer and die.')
+        if monster == 1:
+            print ('Wow, that was RATicle dude!')
+            print ('Good luck in the other rooms!')
+            startRoom()
+        if monster == 2:
+            print ('聖なるくそ！あなたは彼女を殺した！')
+            print ('ここからあなたに怪物を出しなさい.')
+            startRoom()
+        if monster == 3:
+            print ('Way to take charge... and kill it.')
+            print ('Has anyone told you how boring you are?')
+            startRoom()
+        if monster == 4:
+            print ('Thanks, that was giving me goosebumps.')
+            print ('Do me a favor and let me cry in peace.')
+            startRoom()
+    else:
+        print('You die because you didnt fight')
+        
+def roomEast():
+    global enteredRooms
+    global health
+    global stupidValue
+    global playerItems
+    global eastRoom
+    global startRoom
+    global funCounter
+    global funValue
+    global funMeter
+    global getTongs
+    global getShirt
+    playerItems =[]
+    damage = random.randint(0,100)
+    fight = ''
+    
+    print ('You shiver because of the low temperatures')
+    if getShirt == True:
+        wearShirt = raw_input('Do you want to put the shirt on? (Y/N)').upper()
+        while wearShirt != 'Y' and wearShirt != 'N':
+            if wearShirt == 'Y':
+                print ('You put the shirt on. You feel warm.')
+            if wearShirt == 'N':
+                print ('You continue to shiver')
+            else:
+                print ('Please answer "Y" or "N"')               
+    
+    print ('Welcome to the east room Ted!')
+    funValue += 1
+    funCounter += 1
+
+    if funMeter == 0:
+        print ('You are attacked by an extra-large shirt!')
+        print ('It is an extra-large shirt. What else is there to say?')
+        print ('The shirt charges you')
+        if damage <= 85:
+            print ('The shirt misses!')
+        else:
+            print ('The shirt hit you ... somehow.')
+            health -= 1
+            if health == 0:
+                print ('You got rekt. Git Gud son')
+        fight = raw_input('Do you want to attack (Y/N)?').upper()
+        while fight != 'Y' and fight != 'N':
+            if fight == 'Y':
+                print ('You rip the shirt in half!')
+                print ('You beat the shirt!')
+                if getShirt == False:
+                    print ('You got a red shirt')
+                    playerItems.append('Red shirt')
+                print ('You were teleported back to the main room')
+                funMeter = 0
+                startRoom()
+            elif fight == 'N':
+                print ('You run back to the starting room')
+                funMeter == 0
+                startRoom()
+            else:
+                print ('That is not an applicable answer')
+    if funMeter == 1:
+        print ('You are attacked by a talking toilet!')
+        print ('It screams, "Scheiße in meinen Mund!"')
+        print ('It is impossible to understand.')
+        print ('The toilet charges you')
+        if damage <= 85:
+            print ('The toilet misses!')
+        else:
+            print ('The toilet hit you.')
+            health -= 1
+            if health == 0:
+                print ('You got rekt. Git Gud son')
+        fight = raw_input('Do you want to attack (Y/N)?').upper()
+        while fight != 'Y' and fight != 'N':
+            if fight == 'Y':
+                if getTongs == True:
+                    useTongs = raw_input('Do you want to use the tongs? (Y/N)').upper()
+                    if useTongs == 'Y':
+                        print ('You suffocate the toilet!')
+                else:
+                    print ('You smash the toilet to pieces!')
+                    print ('You beat the toilet!')
+                    if getTongs == False:
+                        print ('You got a pair of tongs')
+                        playerItems.append('Tongs')
+                    print ('You were teleported back to the main room')
+                    funMeter = 0
+                    startRoom()
+            elif fight == 'N':
+                print ('You run back to the starting room')
+                funMeter == 0
+                startRoom()
+            else:
+                print ('That is not an applicable answer')
+    if funMeter == 2:
+        print ('You are attacked by the Sofa King!')
+        print ('...Get it?')
+        print ('The King charges you')
+        if damage <= 85:
+            print ('The King misses!')
+        else:
+            print ('The King hit you with a sofa.')
+            health -= 1
+            if health == 0:
+                print ('You got rekt. Git Gud son')
+        fight = raw_input('Do you want to attack (Y/N)?').upper()
+        while fight != 'Y' and fight != 'N':
+            if fight == 'Y':
+                print ('You beat the king with his own sofa!')
+                print ('You beat the Sofa King!')
+                print ('You were teleported back to the main room')
+                funMeter = 0
+                startRoom()
+            elif fight == 'N':
+                print ('You run back to the starting room')
+                funMeter == 0
+                startRoom()
+            else:
+                print ('That is not an applicable answer')
+            
+            
+def roomWest():
+    global enteredRooms
+    global health
+    global stupidValue
+    global playerItems
+    global westRoom
+    global startRoom
+    global funMeter
+    global funValue
+    global funCounter
+    print('You entered the West room.')
+    westRoom = True
+    funMeter += 1
+    funCounter += 1
+    print (funValue)
+    if funValue == 0:
+        print('A brick wall appears!')
+        while westRoom == True:
+            doOrDie = raw_input('Do you fight (Y/N)?').upper()
+            if doOrDie == 'Y':
+                print('You are actually stupid. What made you think you can beat a brick wall in a fight?')
+                print('You win...I guess...')
+                print('You took one damage from punching the brick wall.')
+                stupidValue += 1
+                health -= 1
+                print('You exit the room')
+                westRoom = False
+                startRoom = True
+                startRoom()
+            elif doOrDie == 'N':
+                do = raw_input('Would you like to walk around the wall (Y/N)?').upper()
+                if do == 'Y':
+                    print('You win! And you found a piece of lint on the other side of the wall!')
+                    playerItems.append('Piece of Lint')
+                    print('You exit the room.')
+                    westRoom = False
+                    startRoom = True
+                    startRoom()
+                elif do == 'N':
+                    print('You wait forever for the brick wall to move out of your way and die.')
+                    westRoom = False
+                else:
+                    print('Not a valid answer')
+            else:
+                print ('Not a valid answer')
+    if funValue == 1:
+        print('A juicy toothbrush appears!')
+        while westRoom == True:
+            doOrDie = raw_input('Do you fight (Y/N)?').upper()
+            if doOrDie == 'Y':
+                print('You snapped the toothbrush in half. It feels like two people are verys sad somewhere in the world.')
+                print('You win!')
+                print('You exit the room.')
+                westRoom = False
+                startRoom = True
+                startRoom()
+            elif doOrDie == 'N':
+                print('You win! Now you have a "juicy toothbrush"!')
+                playerItems.append('a juicy toothbrush')
+                print('You exit the room')
+                westRoom = False
+                startRoom = True
+                startRoom()
+            else:
+                print ('Not a valid answer')               
+    if funValue == 2:
+        print('Zesty Stalin appears!')
+        while westRoom == True:
+            doOrDie = raw_input('Do you fight (Y/N)?').upper()
+            if doOrDie == 'Y':
+                print('Stalin sends you to the gulag for not being equal enough.')
+                print('You lost all of your items and all but one of your health!')
+                health = 1
+                del playerItems[:]
+                print('You exit the room.')
+                westRoom = False
+                startRoom = True
+                startRoom()
+            elif doOrDie == 'N':
+                do = raw_input('How do you deal with this monster(Type what you want)?').lower()
+                if "beef stroganoff" or "borscht" in do:
+                    print ("Zesty Stalin accepts your offering. He gives you the blessing of Stalin.")
+                    playerItems.append('The Blessing of Stalin')
+                    print('You exit the room.')
+                    westRoom = False
+                    startRoom = True
+                    startRoom()
+                else:
+                    print ('Stalin smites you.')
+            else:
+                print ('Not a valid answer')
+                
+def roomSouth():  
+    global health
+    global stupidValue
+    global playerItems
+    global southRoom
+    global startRoom
+    print('You entered Room South')      
+    southRoom = True
+    print (funValue)
+    if funValue == 0:
+        print('You get hit by a road!')
+        print('The road apoligizes as much as it can but it does not have life or car insurance so you die of a road accident.')
+    if funValue == 1:
+        print ("You aquired Alzhiemer's disease!")
+        while funValue == 1:
+            print('You forgot what you were doing.')
+    if funValue == 2:
+            print('Six six year olds appear')
+            print('Their needless spam of "We love fortnite" along with their terrible dancing and fidget spinners fills the room with trash and gives you cholera and you die.')
+    if funValue == 3:
+        print('Congratz you won!')
